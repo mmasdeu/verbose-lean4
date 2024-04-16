@@ -1,0 +1,9 @@
+import Verbose.Catalan.Assume
+import Verbose.Catalan.By
+import Verbose.Catalan.Since
+import Verbose.Catalan.Claim
+import Verbose.Catalan.Fix
+import Verbose.Catalan.Lets
+import Verbose.Catalan.Set
+import Verbose.Catalan.We
+import Verbose.Catalan.Calc

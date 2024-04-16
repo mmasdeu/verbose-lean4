@@ -134,7 +134,8 @@ def contraposeTac (pushNeg : Bool) : TacticM Unit := withMainContext do
   let newGoals ← goal.apply (.const ``Mathlib.Tactic.Contrapose.mtr [])
   replaceMainGoal newGoals
   if pushNeg then
-    evalTactic (← `(tactic| set_option push_neg.use_distrib true in push_neg))
+    evalTactic (← `(tactic| try set_option push_neg.use_distrib true in push_neg))
+
 
 def pushNegTac (loc? : Option Location) (new? : Option Term) : TacticM Unit := do
   let l ← loc?.mapM (fun l => unexpandLocation l)
