@@ -10,7 +10,7 @@ Demostració:
   Demostrem que ∀ ε > 0, ∃ N, ∀ n ≥ N, |f (u n) - f x₀| ≤ ε
   Sigui ε > 0
   Per hf aplicat a ε utilitzant que ε > 0 obtenim δ tal que
-    (δ_pos : δ > 0) i (Hf : ∀ x, |x - x₀| ≤ δ ⇒ |f x - f x₀| ≤ ε)
+    (δ_pos : δ > 0) , i (Hf : ∀ x, |x - x₀| ≤ δ ⇒ |f x - f x₀| ≤ ε)
   Per hu aplicat a δ utilitzant que δ > 0 obtenim N tal que Hu : ∀ n ≥ N, |u n - x₀| ≤ δ
   Demostrem que N funciona : ∀ n ≥ N, |f (u n) - f x₀| ≤ ε
   Sigui n ≥ N
@@ -26,16 +26,16 @@ Exercici "Continuitat implica continuitat seqüencial"
 Demostració:
   Demostrem que ∀ ε > 0, ∃ N, ∀ n ≥ N, |f (u n) - f x₀| ≤ ε
   Sigui ε > 0
-  Com que f és contínua a x₀ i ε > 0 obtenim δ tal que
-    (δ_pos : δ > 0) i (Hf : ∀ x, |x - x₀| ≤ δ ⇒ |f x - f x₀| ≤ ε)
-  Com que u convergeix a x₀ i δ > 0 obtenim N tal que Hu : ∀ n ≥ N, |u n - x₀| ≤ δ
+  Com que f és contínua a x₀ , i ε > 0 obtenim δ tal que
+    (δ_pos : δ > 0) , i (Hf : ∀ x, |x - x₀| ≤ δ ⇒ |f x - f x₀| ≤ ε)
+  Com que u convergeix a x₀ , i δ > 0 obtenim N tal que Hu : ∀ n ≥ N, |u n - x₀| ≤ δ
   Demostrem que N funciona : ∀ n ≥ N, |f (u n) - f x₀| ≤ ε
   Sigui n ≥ N
   Com que ∀ x, |x - x₀| ≤ δ → |f x - f x₀| ≤ ε només cal demostrar que |u n - x₀| ≤ δ
-  Com que ∀ n ≥ N, |u n - x₀| ≤ δ i n ≥ N concloem que |u n - x₀| ≤ δ
+  Com que ∀ n ≥ N, |u n - x₀| ≤ δ , i n ≥ N concloem que |u n - x₀| ≤ δ
   /- -- Forward reasoning variation
-  Com que ∀ n ≥ N, |u n - x₀| ≤ δ i n ≥ N obtenim h : |u n - x₀| ≤ δ
-  Com que ∀ x, |x - x₀| ≤ δ → |f x - f x₀| ≤ ε i |u n - x₀| ≤ δ concloem que |f (u n) - f x₀| ≤ ε -/
+  Com que ∀ n ≥ N, |u n - x₀| ≤ δ , i n ≥ N obtenim h : |u n - x₀| ≤ δ
+  Com que ∀ x, |x - x₀| ≤ δ → |f x - f x₀| ≤ ε , i |u n - x₀| ≤ δ concloem que |f (u n) - f x₀| ≤ ε -/
 QED
 
 Exemple "Les successions constants són convergents."
@@ -99,15 +99,15 @@ Exemple "El teorema de l'entrepà"
 Demostració:
   Demostrem que ∀ ε > 0, ∃ N, ∀ n ≥ N, |v n - l| ≤ ε
   Sigui ε > 0
-  Com que u convergeix a l i ε > 0 obtenim N tal que hN : ∀ n ≥ N, |u n - l| ≤ ε
-  Com que w convergeix a l i ε > 0 obtenim N' tal que hN' : ∀ n ≥ N', |w n - l| ≤ ε
+  Com que u convergeix a l , i ε > 0 obtenim N tal que hN : ∀ n ≥ N, |u n - l| ≤ ε
+  Com que w convergeix a l , i ε > 0 obtenim N' tal que hN' : ∀ n ≥ N', |w n - l| ≤ ε
   Demostrem que max N N' funciona : ∀ n ≥ max N N', |v n - l| ≤ ε
   Sigui n ≥ max N N'
-  Com que n ≥ max N N' obtenim (hn : n ≥ N) i (hn' : n ≥ N')
-  Com que ∀ n ≥ N, |u n - l| ≤ ε i n ≥ N obtenim
-   (hNl : -ε ≤ u n - l) i (hNd : u n - l ≤ ε)
-  Com que ∀ n ≥ N', |w n - l| ≤ ε i n ≥ N' obtenim
-    (hN'l : -ε ≤ w n - l) i (hN'd : w n - l ≤ ε)
+  Com que n ≥ max N N' obtenim (hn : n ≥ N) , i (hn' : n ≥ N')
+  Com que ∀ n ≥ N, |u n - l| ≤ ε , i n ≥ N obtenim
+   (hNl : -ε ≤ u n - l) , i (hNd : u n - l ≤ ε)
+  Com que ∀ n ≥ N', |w n - l| ≤ ε , i n ≥ N' obtenim
+    (hN'l : -ε ≤ w n - l) , i (hN'd : w n - l ≤ ε)
   Demostrem que |v n - l| ≤ ε
   Demostrem primer que -ε ≤ v n - l
   Calc -ε ≤ u n - l per assumption

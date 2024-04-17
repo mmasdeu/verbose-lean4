@@ -56,12 +56,12 @@ implement_endpoint (lang := ca) helpExistRelSuggestion (hyp : Name) (headDescr :
     (nameS ineqIdent hS : Ident) (ineqS pS : Term) : SuggestionM Unit := do
   describeHypShape hyp headDescr
   pushCom "Es pot utilitzar fent:"
-  pushTac `(tactic|Per $hyp.ident:term obtenim $nameS:ident tal que ($ineqIdent : $ineqS) i ($hS : $pS))
+  pushTac `(tactic|Per $hyp.ident:term obtenim $nameS:ident tal que ($ineqIdent : $ineqS) , i ($hS : $pS))
   pushComment <| libres [nameS, ineqIdent, hS]
 
 implement_endpoint (lang := ca) helpConjunctionSuggestion (hyp : Name) (h₁I h₂I : Ident) (p₁S p₂S : Term) :
     SuggestionM Unit := do
-  let headDescr := "... i ..."
+  let headDescr := "... , i ..."
   describeHypShape hyp headDescr
   pushCom "Es pot utilitzar fent:"
   pushTac `(tactic|Per $hyp.ident:term obtenim ($h₁I : $p₁S) ($h₂I : $p₂S))
@@ -167,7 +167,7 @@ implement_endpoint (lang := ca) helpSubsetSuggestion (hyp x hx hx' : Name)
   pushCom "La hipòtesi {hyp} demostra la inclusió de {l} dins de {← r.fmt}."
   pushCom "Es pot utilitzar fent:"
   pushTac `(tactic| Per $hyp.ident:ident aplicat a $x.ident utilitzant $hx.ident obtenim $hx'.ident:ident : $x.ident ∈ $(← r.stx))
-  pushCom "on {x} és {describe ambientTypePP} i {hx} demostra que {x} ∈ {l}"
+  pushCom "on {x} és {describe ambientTypePP} , i {hx} demostra que {x} ∈ {l}"
   pushComment <| libre hx'.ident
 
 implement_endpoint (lang := ca) assumptionClosesSuggestion (hypId : Ident) : SuggestionM Unit := do
@@ -187,8 +187,8 @@ implement_endpoint (lang := ca) helpForAllRelExistsRelSuggestion (hyp var_name' 
     SuggestionM Unit := do
   describeHypStart hyp headDescr
   pushCom "Es pot utilitzar fent:"
-  pushTac `(tactic|Per $hyp.ident:term aplicat a $n₀.ident utilitzant $hn₀.ident obtenim $var_name'.ident:ident tal que ($ineqIdent : $ineqS) i ($hn'S : $p'S))
-  pushCom "a on {n₀} és {describe t} i {hn₀} és una demostració del fet que {hypDescr}."
+  pushTac `(tactic|Per $hyp.ident:term aplicat a $n₀.ident utilitzant $hn₀.ident obtenim $var_name'.ident:ident tal que ($ineqIdent : $ineqS) , i ($hn'S : $p'S))
+  pushCom "a on {n₀} és {describe t} , i {hn₀} és una demostració del fet que {hypDescr}."
   pushComment <| libres [var_name'.ident, ineqIdent, hn'S]
 
 implement_endpoint (lang := ca) helpForAllRelExistsSimpleSuggestion (hyp n' hn' n₀ hn₀ : Name)
@@ -196,7 +196,7 @@ implement_endpoint (lang := ca) helpForAllRelExistsSimpleSuggestion (hyp n' hn' 
   describeHypStart hyp headDescr
   pushCom "Es pot utilitzar fent:"
   pushTac `(tactic|Per $hyp.ident:term aplicat a $n₀.ident utilitzant $hn₀.ident obtenim $n'.ident:ident tal que ($hn'.ident : $p'S))
-  pushCom "a on {n₀} és {describe t} i {hn₀} és una demostració del fet que {n₀rel}"
+  pushCom "a on {n₀} és {describe t} , i {hn₀} és una demostració del fet que {n₀rel}"
   pushComment <| libres [n'.ident, hn'.ident]
 
 implement_endpoint (lang := ca) helpForAllRelGenericSuggestion (hyp n₀ hn₀ : Name)
@@ -204,7 +204,7 @@ implement_endpoint (lang := ca) helpForAllRelGenericSuggestion (hyp n₀ hn₀ :
   describeHypStart hyp headDescr
   pushCom "Es pot utilitzar fent:"
   pushTac `(tactic|Per $hyp.ident:term aplicat a $n₀.ident utilitzant $hn₀.ident obtenim ($newsI : $pS))
-  pushCom "a on {n₀} és {describe t} i {hn₀} és una demostració del fet que {n₀rel}"
+  pushCom "a on {n₀} és {describe t} , i {hn₀} és una demostració del fet que {n₀rel}"
   pushComment <| libre newsI
 
 implement_endpoint (lang := ca) helpForAllSimpleExistsRelSuggestion (hyp var_name' nn₀ : Name)
@@ -212,7 +212,7 @@ implement_endpoint (lang := ca) helpForAllSimpleExistsRelSuggestion (hyp var_nam
     SuggestionM Unit := do
   describeHypStart hyp headDescr
   pushCom "Es pot utilitzar fent:"
-  pushTac `(tactic|Per $hyp.ident:term aplicat a $nn₀.ident obtenim $var_name'.ident:ident tal que ($ineqIdent : $ineqS) i ($hn'S : $p'S))
+  pushTac `(tactic|Per $hyp.ident:term aplicat a $nn₀.ident obtenim $var_name'.ident:ident tal que ($ineqIdent : $ineqS) , i ($hn'S : $p'S))
   pushCom "a on {nn₀} és {describe t}"
   pushComment <| libres [var_name'.ident, ineqIdent, hn'S]
 
@@ -229,7 +229,7 @@ implement_endpoint (lang := ca) helpForAllSimpleForAllRelSuggestion (hyp nn₀ v
   pushCom "La hipòtesi {hyp} comença amb “{headDescr}"
   pushCom "Es pot utilitzar fent:"
   pushTac `(tactic|Per $hyp.ident:term aplicat a [$nn₀.ident, $var_name'₀.ident, $H.ident] obtenim ($h.ident : $p'S))
-  pushCom "a on {nn₀} i {var_name'₀} són {describe_pl t} i {H} és una demostració de {rel₀}"
+  pushCom "a on {nn₀} , i {var_name'₀} són {describe_pl t} , i {H} és una demostració de {rel₀}"
   pushComment <| libre h.ident
 
 implement_endpoint (lang := ca) helpForAllSimpleGenericSuggestion (hyp nn₀ hn₀ : Name) (headDescr : String)
@@ -312,7 +312,7 @@ implement_endpoint (lang := ca) helpExistsGoalSuggestion (headDescr : String) (n
   pushCom "substituïnt {nn₀} per {describe t}"
 
 implement_endpoint (lang := ca) helpConjunctionGoalSuggestion (p p' : Term) : SuggestionM Unit := do
-  descrGoalShape "... i ..."
+  descrGoalShape "... , i ..."
   descrDirectProof
   pushTac `(tactic|Demostrem primer que $p)
   pushCom "Quan acabem aquesta primera demostració, caldrà demostrar encara que {← p'.fmt}"
@@ -387,7 +387,7 @@ implement_endpoint (lang := ca) helpMemInterGoalSuggestion (elem le : Expr) : Su
   pushTac `(tactic|Demostrem primer que $(← elem.stx) ∈ $(← le.stx))
 
 implement_endpoint (lang := ca) helpMemUnionGoalSuggestion (elem le re : Expr) : SuggestionM Unit := do
-  pushCom "L'objectiu és demostrar que {← elem.fmt} pertany a la unió de {← le.fmt} i {← re.fmt}."
+  pushCom "L'objectiu és demostrar que {← elem.fmt} pertany a la unió de {← le.fmt} , i {← re.fmt}."
   descrDirectProof
   pushTac `(tactic|Demostrem que $(← elem.stx) ∈ $(← le.stx))
   flush
@@ -439,7 +439,7 @@ example {P : ℕ → Prop} (h : ∀ n > 0, P n) : P 2 := by
 
 /--
 info: Ajuda
-• Per h obtenim n tal que (n_pos : n > 0) i (hn : P n)
+• Per h obtenim n tal que (n_pos : n > 0) , i (hn : P n)
 -/
 #guard_msgs in
 example {P : ℕ → Prop} (h : ∃ n > 0, P n) : True := by
@@ -448,7 +448,7 @@ example {P : ℕ → Prop} (h : ∃ n > 0, P n) : True := by
 
 /--
 info: Ajuda
-• Per h obtenim ε tal que (ε_pos : ε > 0) i (hε : P ε)
+• Per h obtenim ε tal que (ε_pos : ε > 0) , i (hε : P ε)
 -/
 #guard_msgs in
 example {P : ℝ → Prop} (h : ∃ ε > 0, P ε) : True := by
@@ -574,7 +574,7 @@ example (P : ℕ → ℕ → Prop) (k l n : ℕ) (h : l - n = 0 → P l k) : Tru
 
 /--
 info: Ajuda
-• Per h aplicat a k₀ utilitzant hk₀ obtenim n tal que (n_sup : n ≥ 3) i (hn : ∀ (l : ℕ), l - n = 0 ⇒ P l k₀)
+• Per h aplicat a k₀ utilitzant hk₀ obtenim n tal que (n_sup : n ≥ 3) , i (hn : ∀ (l : ℕ), l - n = 0 ⇒ P l k₀)
 -/
 #guard_msgs in
 example (P : ℕ → ℕ → Prop) (h : ∀ k ≥ 2, ∃ n ≥ 3, ∀ l, l - n = 0 → P l k) : True := by
@@ -592,7 +592,7 @@ example (P : ℕ → ℕ → Prop) (h : ∀ k, ∀ n ≥ 3, ∀ l, l - n = 0 →
 
 /--
 info: Ajuda
-• Per h aplicat a k₀ utilitzant hk₀ obtenim n_1 tal que (n_1_sup : n_1 ≥ 3) i (hn_1 : ∀ (l : ℕ), l - n = 0 ⇒ P l k₀)
+• Per h aplicat a k₀ utilitzant hk₀ obtenim n_1 tal que (n_1_sup : n_1 ≥ 3) , i (hn_1 : ∀ (l : ℕ), l - n = 0 ⇒ P l k₀)
 -/
 #guard_msgs in
 example (P : ℕ → ℕ → Prop) (n : ℕ) (h : ∀ k ≥ 2, ∃ n ≥ 3, ∀ l, l - n = 0 → P l k) : True := by
@@ -601,7 +601,7 @@ example (P : ℕ → ℕ → Prop) (n : ℕ) (h : ∀ k ≥ 2, ∃ n ≥ 3, ∀ 
 
 /--
 info: Ajuda
-• Per h obtenim n tal que (n_sup : n ≥ 5) i (hn : P n)
+• Per h obtenim n tal que (n_sup : n ≥ 5) , i (hn : P n)
 -/
 #guard_msgs in
 example (P : ℕ → Prop) (h : ∃ n ≥ 5, P n) : True := by
@@ -610,7 +610,7 @@ example (P : ℕ → Prop) (h : ∃ n ≥ 5, P n) : True := by
 
 /--
 info: Ajuda
-• Per h aplicat a k₀ utilitzant hk₀ obtenim n tal que (n_sup : n ≥ 3) i (hn : P n k₀)
+• Per h aplicat a k₀ utilitzant hk₀ obtenim n tal que (n_sup : n ≥ 3) , i (hn : P n k₀)
 -/
 #guard_msgs in
 example (P : ℕ → ℕ → Prop) (h : ∀ k ≥ 2, ∃ n ≥ 3, P n k) : True := by
