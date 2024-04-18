@@ -108,6 +108,8 @@ macro (name := abel) "na_abel" : tactic =>
 macro (name := ring) "na_ring" : tactic =>
   `(tactic| first | ring1 | ring_nf)
 
+def searchTac : TacticM Unit := do
+  evalTactic (← `(tactic|exact?))
 
 def computeAtGoalTac : TacticM Unit := do
   evalTactic (← `(tactic|iterate 3 (try first | done | fail_if_no_pro na_ring | fail_if_no_pro norm_num | fail_if_no_pro na_abel)))

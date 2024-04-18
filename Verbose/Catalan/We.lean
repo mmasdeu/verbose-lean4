@@ -8,15 +8,33 @@ syntax colGt " que esdevé " term : becomesCA
 
 def extractBecomesCA (e : Lean.TSyntax `becomesCA) : Lean.Term := ⟨e.raw[1]!⟩
 
+/--
+Reescrivim utilitzant / via / mitjançant ... (a ...) / (a tot arreu)
+-/
 elab rw:"Reescrivim" (" utilitzant " <|> " via " <|> " mitjançant ") s:myRwRuleSeq l:(location)? new:(becomesCA)? : tactic => do
   rewriteTac rw s (l.map expandLocation) (new.map extractBecomesCA)
 
+
+
+/--
+Reescrivim utilitzant / via / mitjançant ... (a ...) / (a tot arreu)
+-/
 elab rw:"Reescrivim" (" utilitzant " <|> " via " <|> " mitjançant ") s:myRwRuleSeq " a tot arreu" : tactic => do
   rewriteTac rw s (some Location.wildcard) none
 
+/--
+Separem ... en casos
+
+Quan tenim una hipòtesi de tipus ∨, com ara h : P ∨ Q, aquesta tàctica ens permet trencar-ho en els dos casos.
+-/
 elab "Separem" exp:term " en casos " : tactic =>
   discussOr exp
 
+/--
+Separem en casos segons si P
+
+Ens permet fer una demostració per casos: cas P i cas ¬ P.
+-/
 elab "Separem" " en casos segons si " exp:term : tactic =>
   discussEm exp
 
@@ -26,12 +44,26 @@ elab "Concloem" " amb " e:maybeAppliedCA : tactic => do
 elab "Combinem" " [" prfs:term,* "]" : tactic => do
   combineTac prfs.getElems
 
+/--
+Busca un teorema que demostri directament l'objectiu amb les hipòtesis disponibles.
+-/
+elab "Busca" : tactic => do evalTactic (← `(tactic|exact?))
+
+/--
+Realitza diferents simplificacions a l'objectiu.
+-/
 elab "Calculem" loc:(location)? : tactic => do
   computeTac loc
 
+/--
+Apliquem h intenta canviar l'objectiu per les hipòtesis del resultat h.
+-/
 elab "Apliquem" exp:term : tactic => do
   evalApply (← `(tactic|apply $exp))
 
+/--
+Canvia la hipòtesi pel resultat d'aplicar-li el teorema.
+-/
 elab "Apliquem" exp:term " at " h:ident: tactic => do
   let loc ← ident_to_location h
   evalTactic (← `(tactic|apply_fun $exp $loc:location))

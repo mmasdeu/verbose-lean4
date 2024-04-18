@@ -38,7 +38,7 @@ match toString t with
 | "ℤ" => "uns quants enters"
 | t => "unes quantes expressions amb tipus " ++ t
 
-def libre (s : Ident) : String := s!"El nom {s.getId} es podt escollir lliurement entre els disponibles."
+def libre (s : Ident) : String := s!"El nom {s.getId} es pot escollir lliurement entre els disponibles."
 
 def printIdentList (l : List Ident) : String := commaSep <| l.toArray.map (toString ·.getId)
 
@@ -830,4 +830,3 @@ info: Ajuda
 example : ¬ (2+2 = 5) := by
   ajuda
   trivial
-
