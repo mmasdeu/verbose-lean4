@@ -812,7 +812,7 @@ example : True := by
   aide
   trivial
 
-configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal
+configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal helpNegationGoal
 
 /--
 info: Aide

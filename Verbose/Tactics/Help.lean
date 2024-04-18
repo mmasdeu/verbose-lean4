@@ -444,11 +444,18 @@ def helpByContradictionGoal : GoalHelpExt where
     goal.withContext do
     let pushed := (← pushNegCore neg).expr
     let Hyp := mkIdent (← goal.getUnusedUserName `hyp)
-    --let tgt ← whnfR (← neg)
     if let some _ := pushed.not? then
       helpByContradictionSuggestion Hyp (← PrettyPrinter.delab pushed)
-    else
-      helpNegationSuggestion Hyp (← PrettyPrinter.delab pushed)
+
+open Mathlib.Tactic.PushNeg in
+@[goalHelp ¬ _]
+def helpNegationGoal : GoalHelpExt where
+  run (goal : MVarId) (g : VExpr) : SuggestionM Unit := do
+    let neg : Expr := .app (.const ``Not []) g.toExpr
+    goal.withContext do
+    let pushed := (← pushNegCore neg).expr
+    let Hyp := mkIdent (← goal.getUnusedUserName `hyp)
+    helpNegationSuggestion Hyp (← PrettyPrinter.delab pushed)
 
 register_endpoint helpEquivalenceGoalSuggestion (r l : Format) (rS lS : Term) : SuggestionM Unit
 

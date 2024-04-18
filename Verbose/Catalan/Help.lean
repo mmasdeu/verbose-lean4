@@ -811,7 +811,7 @@ example : True := by
   ajuda
   trivial
 
-configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal
+configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal helpNegationGoal
 
 /--
 info: Ajuda
@@ -830,3 +830,4 @@ info: Ajuda
 example : ¬ (2+2 = 5) := by
   ajuda
   trivial
+

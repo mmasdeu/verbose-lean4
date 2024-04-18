@@ -808,7 +808,7 @@ example : True := by
   help
   trivial
 
-configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal
+configureHelpProviders DefaultHypHelp DefaultGoalHelp helpByContradictionGoal helpNegationGoal
 
 /--
 info: Help
