@@ -419,7 +419,8 @@ implement_endpoint (lang := en) helpByContradictionSuggestion (hyp : Ident) (ass
   pushTac `(tactic| Assume for contradiction $hyp:ident : $assum)
 
 implement_endpoint (lang := en) helpNegationSuggestion (hyp : Ident) (assum : Term) : SuggestionM Unit := do
-  pushCom "One can start a proof by contradiction using"
+  pushCom "The goal is a negation."
+  pushCom "One can start a proof \"by contradiction\" using"
   pushTac `(tactic| Assume $hyp:ident : $assum)
 
 set_option linter.unusedVariables false

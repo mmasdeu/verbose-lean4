@@ -417,7 +417,7 @@ implement_endpoint (lang := fr) helpByContradictionSuggestion (hyp : Ident) (ass
   pushTac `(tactic| Supposons par l'absurde $hyp:ident : $assum)
 
 implement_endpoint (lang := fr) helpNegationSuggestion (hyp : Ident) (assum : Term) : SuggestionM Unit := do
-  pushCom "On peut débuter une démonstration par l’absurde par :"
+  pushCom "Le but est une négation, donc on peut débuter par :"
   pushTac `(tactic| Supposons $hyp:ident : $assum)
 
 set_option linter.unusedVariables false
@@ -819,5 +819,14 @@ info: Aide
 -/
 #guard_msgs in
 example : True := by
+  aide
+  trivial
+
+/--
+info: Aide
+• Supposons hyp : 2 + 2 = 5
+-/
+#guard_msgs in
+example : ¬ ( 2+2 = 5 ) := by
   aide
   trivial

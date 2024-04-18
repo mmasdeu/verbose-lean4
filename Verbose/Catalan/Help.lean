@@ -419,7 +419,8 @@ implement_endpoint (lang := ca) helpByContradictionSuggestion (hyp : Ident) (ass
   pushTac `(tactic| Suposem per arribar a contradicció que $hyp:ident : $assum)
 
 implement_endpoint (lang := ca) helpNegationSuggestion (hyp : Ident) (assum : Term) : SuggestionM Unit := do
-  pushCom "Podem començar una demostració per reducció a l'absurd amb:"
+  pushCom "L'objectiu és una negació."
+  pushCom "Podem començar una demostració \"per reducció a l'absurd\" amb:"
   pushTac `(tactic| Suposem $hyp:ident : $assum)
 
 set_option linter.unusedVariables false
@@ -818,5 +819,14 @@ info: Ajuda
 -/
 #guard_msgs in
 example : True := by
+  ajuda
+  trivial
+
+/--
+info: Ajuda
+• Suposem per arribar a contradicció que hyp : 2 + 2 = 5
+-/
+#guard_msgs in
+example : ¬ (2+2 = 5) := by
   ajuda
   trivial
