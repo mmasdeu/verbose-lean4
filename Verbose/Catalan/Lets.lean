@@ -25,13 +25,13 @@ elab "Demostrem" " primer que " stmt:term : tactic =>
 elab "Demostrem" " ara que " stmt:term : tactic =>
   unblockTac stmt
 
-syntax "You need to announce: Demostrem ara que " term : term
+syntax "Ara cal enunciar: Demostrem ara que " term : term
 
 open Lean Parser Term PrettyPrinter Delaborator in
 @[delab app.goalBlocker]
 def goalBlocker_delab : Delab := whenPPOption Lean.getPPNotation do
   let stx ← SubExpr.withAppArg delab
-  `(You need to announce: Demostrem ara que $stx)
+  `(Ara cal enunciar: Demostrem ara que $stx)
 
 macro "Demostrem" " una contradicció" : tactic => `(tactic|exfalso)
 

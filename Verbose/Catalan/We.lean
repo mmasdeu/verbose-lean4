@@ -336,3 +336,4 @@ but is expected to have type
     Reformulem h com 2 = 3
   Reformulem h com 2 = 2
   trivial
+
