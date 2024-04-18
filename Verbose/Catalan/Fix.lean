@@ -51,10 +51,10 @@ pure "No hi ha cap hipòtesi per introduir."
 
 implement_endpoint (lang := ca) negationByContra (hyp : Format) : CoreM String :=
 pure s!"L'objectiu és una negació, no cal demostrar-lo per contradicció. \
- Podeu escriure directament: Suposem {hyp}."
+ Es pot assumir directament {hyp} (amb \"Suposem\")"
 
 implement_endpoint (lang := ca) wrongNegation : CoreM String :=
-pure "This is not what you should Suposem per arribar a contradicció que, even after pushing negations."
+pure "Això no és el que cal assumir prer arribar a contradicció, fins it tot després de simplificar les negacions."
 
 macro_rules
 | `(ℕ) => `(Nat)

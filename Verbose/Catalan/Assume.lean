@@ -59,7 +59,7 @@ example (P Q : Prop) (h : ¬ Q → ¬ P) : P → Q := by
 
 example : 0 ≠ 1 := by
   success_if_fail_with_msg
-    "L'objectiu és una negació, no cal demostrar-lo per contradicció. Podeu escriure directament: Suposem 0 = 1."
+    "L'objectiu és una negació, no cal demostrar-lo per contradicció. Es pot assumir directament 0 = 1 (amb \"Suposem\")"
     Suposem per arribar a contradicció que h : 0 = 1
   norm_num
 

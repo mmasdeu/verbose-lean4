@@ -416,6 +416,10 @@ implement_endpoint (lang := fr) helpByContradictionSuggestion (hyp : Ident) (ass
   pushCom "On peut débuter une démonstration par l’absurde par :"
   pushTac `(tactic| Supposons par l'absurde $hyp:ident : $assum)
 
+implement_endpoint (lang := fr) helpNegationSuggestion (hyp : Ident) (assum : Term) : SuggestionM Unit := do
+  pushCom "On peut débuter une démonstration par l’absurde par :"
+  pushTac `(tactic| Supposons $hyp:ident : $assum)
+
 set_option linter.unusedVariables false
 
 setLang fr

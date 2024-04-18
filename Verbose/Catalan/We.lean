@@ -8,10 +8,10 @@ syntax colGt " que esdevé " term : becomesCA
 
 def extractBecomesCA (e : Lean.TSyntax `becomesCA) : Lean.Term := ⟨e.raw[1]!⟩
 
-elab rw:"Reescrivim" " utilitzant " s:myRwRuleSeq l:(location)? new:(becomesCA)? : tactic => do
+elab rw:"Reescrivim" (" utilitzant " <|> " via " <|> " mitjançant ") s:myRwRuleSeq l:(location)? new:(becomesCA)? : tactic => do
   rewriteTac rw s (l.map expandLocation) (new.map extractBecomesCA)
 
-elab rw:"Reescrivim" " utilitzant " s:myRwRuleSeq " a tot arreu" : tactic => do
+elab rw:"Reescrivim" (" utilitzant " <|> " via " <|> " mitjançant ") s:myRwRuleSeq " a tot arreu" : tactic => do
   rewriteTac rw s (some Location.wildcard) none
 
 elab "Separem" exp:term " en casos " : tactic =>
@@ -137,11 +137,11 @@ example (a b c : ℕ) (h : a = b) (h' : a = c) : b = c := by
   Concloem amb h'
 
 example (a b c : ℕ) (h : a = b) (h' : a = c) : b = c := by
-  Reescrivim utilitzant h at h'
+  Reescrivim via h at h'
   Concloem amb h'
 
 example (a b : Nat) (h : a = b) (h' : b = 0): a = 0 := by
-  Reescrivim utilitzant ← h at h' que esdevé a = 0
+  Reescrivim mitjançant ← h at h' que esdevé a = 0
   exact h'
 
 example (a b : Nat) (h : a = b) (h' : b = 0): a = 0 := by

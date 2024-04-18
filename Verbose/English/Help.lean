@@ -418,6 +418,10 @@ implement_endpoint (lang := en) helpByContradictionSuggestion (hyp : Ident) (ass
   pushCom "One can start a proof by contradiction using"
   pushTac `(tactic| Assume for contradiction $hyp:ident : $assum)
 
+implement_endpoint (lang := en) helpNegationSuggestion (hyp : Ident) (assum : Term) : SuggestionM Unit := do
+  pushCom "One can start a proof by contradiction using"
+  pushTac `(tactic| Assume $hyp:ident : $assum)
+
 set_option linter.unusedVariables false
 
 configureAnonymousGoalSplittingLemmas Iff.intro Iff.intro' And.intro And.intro' abs_le_of_le_le abs_le_of_le_le'
