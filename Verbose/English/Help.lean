@@ -818,3 +818,12 @@ info: Help
 example : True := by
   help
   trivial
+
+/--
+info: Help
+• Assume hyp : 2 + 2 = 5
+-/
+#guard_msgs in
+example : ¬ (2+2 = 5) := by
+  help
+  trivial

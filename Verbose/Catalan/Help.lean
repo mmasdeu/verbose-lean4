@@ -824,7 +824,7 @@ example : True := by
 
 /--
 info: Ajuda
-• Suposem per arribar a contradicció que hyp : 2 + 2 = 5
+• Suposem hyp : 2 + 2 = 5
 -/
 #guard_msgs in
 example : ¬ (2+2 = 5) := by
