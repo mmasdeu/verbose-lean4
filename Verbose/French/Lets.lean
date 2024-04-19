@@ -6,7 +6,11 @@ namespace Verbose.French
 elab "Montrons" " par récurrence" name:ident ":" stmt:term : tactic =>
 letsInduct name.getId stmt
 
+syntax "On " " trouve une contradiction" : tactic
+
 open Lean Elab Tactic in
+
+macro "On " " trouve une contradiction" : tactic => `(tactic | contradiction)
 
 macro "Montrons" " que " stmt:term :tactic =>
 `(tactic| first | show $stmt | apply Or.inl; show $stmt | apply Or.inr; show $stmt)
@@ -101,6 +105,9 @@ example : True ↔ True := by
 example (h : False) : 2 = 1 := by
   Montrons une contradiction
   exact h
+
+example (h : 2 > 1) (h' : ¬ 2 > 1) : False := by
+  On trouve une contradiction
 
 example (P : Nat → Prop) (h₀ : P 0) (h : ∀ n, P n → P (n+1)) : P 4 := by
   Montrons par récurrence H : ∀ k, P k

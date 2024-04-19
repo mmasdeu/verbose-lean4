@@ -4,7 +4,11 @@ import Mathlib.Tactic.Linarith
 elab "Let's" " prove by induction" name:ident ":" stmt:term : tactic =>
 letsInduct name.getId stmt
 
+syntax "We " " reach a contradiction" : tactic
+
 open Lean Elab Tactic in
+
+macro "We " " reach a contradiction" : tactic => `(tactic | contradiction)
 
 macro "Let's" " prove that " stmt:term :tactic =>
 `(tactic| first | show $stmt | apply Or.inl; show $stmt | apply Or.inr; show $stmt)
@@ -97,6 +101,10 @@ example : True ↔ True := by
 example (h : False) : 2 = 1 := by
   Let's prove it's contradictory
   exact h
+
+example (h : 2 > 1) (h' : ¬ 2 > 1) : False := by
+  We reach a contradiction
+
 
 example (P : Nat → Prop) (h₀ : P 0) (h : ∀ n, P n → P (n+1)) : P 4 := by
   Let's prove by induction H : ∀ k, P k
