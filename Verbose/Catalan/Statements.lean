@@ -10,7 +10,7 @@ open Lean.Parser.Term (bracketedBinder)
 implement_endpoint (lang := ca) mkWidgetProof (prf : TSyntax ``tacticSeq) : CoreM (TSyntax `tactic) :=
 Lean.TSyntax.mkInfoCanonical <$> `(tactic| with_suggestions $prf)
 
-elab name?:(ident)? ("Exercici"<|>"Exemple") str
+elab name?:(ident)? ("Exercici"<|>"Exemple"<|>"Lema"<|>"Teorema") str
     "Dades:"? objs:bracketedBinder*
     "Hipòtesis:"? hyps:bracketedBinder*
     "Conclusió:" concl:term

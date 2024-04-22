@@ -323,7 +323,7 @@ implement_endpoint (lang := ca) helpConjunctionGoalSuggestion (p p' : Term) : Su
 
 implement_endpoint (lang := ca) helpDisjunctionGoalSuggestion (p p' : Term) : SuggestionM Unit := do
   descrGoalShape "... o ..."
-  pushCom "Per tant una demostració directe comença per enunciar quina alternativa ens disposem a demostrar:"
+  pushCom "Per tant una demostració directa comença per enunciar quina alternativa ens disposem a demostrar:"
   pushTac `(tactic|Demostrem que $p)
   flush
   pushCom "o bé:"
